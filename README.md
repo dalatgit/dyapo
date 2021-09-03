@@ -1,4 +1,4 @@
-# dyapo
+# Proyecto DYAPO
 Código fuente del prototipo experimental del proyecto DYAPO http://docs.dalatcomunidad.org/repositorio/proyecto-dyapo/
 
 Este proyecto es un experimento, el código aquí presentado es inestable, borrador, experimental, no está optimizado, no ha sido validado con las mejores prácticas de diseño ni de programación. Fue hecho para usar, validar una idea, iterar de ser necesario y luego desechar.
