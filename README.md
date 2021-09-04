@@ -6,5 +6,5 @@ El código aquí presentado es inestable, borrador y experimental, no ha sido va
 Colaboraron en hacer este prototipo:
 
 - Diseño y revisión de accesibilidad: Josías Vasquez [Github](https://github.com/coachJos)
-- Emmanuel Pulido. [Telegram](https://t.me/EMMANUELPULIDO8)  [Facebook](https://www.facebook.com/emmanuel.pulidotinajero.1)
+- Testing: Emmanuel Pulido. [Telegram](https://t.me/EMMANUELPULIDO8)  [Facebook](https://www.facebook.com/emmanuel.pulidotinajero.1)
 - Concepto y Programación: Henry Tong [Email](mailto:taksantong@gmail.com)
