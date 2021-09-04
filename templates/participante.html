@@ -1,0 +1,72 @@
+<!DOCTYPE html lang="es">
+<html>
+    <head>
+        <title>DYAPO</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/style_blue.css">
+
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+        <script language="javascript">
+    
+            var condicionante = false;
+    
+            //**************pusher
+            var pusher = new Pusher('14be8451483ce1f04450', { cluster: 'us2' });
+    
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function (data) {
+                console.log("evento pusher recibido");
+                console.log(JSON.stringify(data));
+                doCambia(data.valor);
+            });
+
+            function doSaltar() {
+                var selbox = document.getElementById("select_diapo");
+                var idx = selbox.selectedIndex;
+                var valor = selbox.options[idx].value;
+                console.log("doSaltar()");
+                console.log(valor);                
+                doCambia(valor);           
+            }
+    
+            function doCambia(valor) {
+                var dp_id = valor.split("_")[0];
+                var dp_index = valor.split("_")[1];
+                const xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "/dp_get_data_html?valor=" + valor, false);
+                xhttp.send();
+                document.getElementById("zona").innerHTML = xhttp.responseText;
+                var textoADecir = "Mostrando contenido de diapositiva " + dp_index;
+                condicionante = !condicionante;
+                if (condicionante == true)
+                    textoADecir = textoADecir + ".";
+                document.getElementById("demoa").innerHTML = textoADecir;
+            }
+        </script>       
+    </head>
+
+<body>
+	<div id="zona"></div>
+	<br>	
+	<div id="demoa" aria-live="assertive" aria-atomic="true"></div>
+	<br>
+
+    <label for="select_diapo">Saltar a diapositiva</label>
+    <select id="select_diapo" name="select">
+    {%for element in query_result%}
+        <option value='{{element.id|tojson}}_{{loop.index|tojson}}'>{{loop.index}} {{element.p_title}}</option>
+    {%endfor%}
+    </select>
+
+	<input type='button' value='btnir' class="btn btn-danger" onClick='doSaltar()'>
+	
+        <script language="javascript">
+        var selbox = document.getElementById("select_diapo");
+                var valor = selbox.options[0].value;
+                console.log("doSaltarInicial()");
+                console.log(valor);
+                doCambia(valor);
+        </script>	
+</body>
+</html>

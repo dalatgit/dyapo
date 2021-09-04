@@ -1,0 +1,58 @@
+<!DOCTYPE html lang="es">
+<html>
+    <head>
+        <title>DYAPO</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/style.css">
+
+        <script language="javascript">
+    
+            var condicionante = false;
+    
+            function doSaltar() {
+                var selbox = document.getElementById("select_diapo");
+                var idx = selbox.selectedIndex;
+                var valor = selbox.options[idx].value;
+                console.log("doSaltar()");
+                console.log(valor);                
+                doCambia(valor);
+                
+                // notificar cambio
+                const xhttp2 = new XMLHttpRequest();
+                xhttp2.open("GET", "/dp_notify?valor=" + valor, false);
+                xhttp2.send();               
+            }
+    
+            function doCambia(valor) {
+                var dp_id = valor.split("_")[0];
+                var dp_index = valor.split("_")[1];
+                const xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "/dp_get_data_html?valor=" + valor, false);
+                xhttp.send();
+                document.getElementById("zona").innerHTML = xhttp.responseText;
+                var textoADecir = "Mostrando contenido de diapositiva " + dp_index;
+                condicionante = !condicionante;
+                if (condicionante == true)
+                    textoADecir = textoADecir + ".";
+                document.getElementById("demoa").innerHTML = textoADecir;
+            }
+        </script>       
+    </head>
+
+<body>
+    <label for="select_diapo">Saltar a diapositiva</label>
+    <select id="select_diapo" name="select">
+    {%for element in query_result%}
+        <option value='{{element.id|tojson}}_{{loop.index|tojson}}'>{{loop.index}} {{element.p_title}}</option>
+    {%endfor%}
+    </select>
+
+	<input type='button' value='ir' onClick='doSaltar()'>
+
+	<div id="zona"></div>
+	<br>	
+	<div id="demoa" aria-live="assertive" aria-atomic="true"></div>
+	<br>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html lang="es">
+<html>
+    <head>
+        <title>DYAPO</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/style.css">
+        <script language="javascript">
+            function doEditar(valor)
+            { 
+                var URL_to_go='/dp_edit_data?mkid='+valor;
+                window.location.href = URL_to_go;
+            }
+        </script>        
+    </head>
+
+<body>
+    
+<table id="myTable" name="myTable">
+<caption>Listado de diapositivas</caption>
+<thead>
+<tr>
+    <th scope="col">Secuencia</th>
+    <th scope="col">Título</th>
+    <th scope="col">Acción</th>
+    <th scope="col">Códigos Internos</th>
+</tr>
+
+{%for element in query_result%}
+    <tr>
+        <th scope='row'>{{loop.index}}</th>
+        <td>{{element.p_title}}</td>
+        <td><input type='button' value='Editar' onClick='doEditar({{element.id|tojson}})'></td>
+        <td>{{element.id}}_{{element.p_seq}}</td>
+    </tr>
+{%endfor%}
+
+</thead>
+<tbody>
+</tbody>
+
+</table>
+
+<br>
+
+<a href='/dp_put_data'>Agregar diapositiva</a>
+
+</body>
+</html>

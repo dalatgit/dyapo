@@ -1,0 +1,20 @@
+<!DOCTYPE html lang="es">
+<html>
+    <head>
+        <title>DYAPO</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+
+<body>
+    
+    <form action = "/dp_put_data" method = post>
+        <input type="hidden" id="hid_id" name="hid_id" value={{mkid|safe}}>
+        <label for="mkdata">Contenido en Formato Markdown:</label><br>
+        <textarea id="mkdata" name="mkdata" rows="40" cols="150">{{mkdata|safe}}</textarea>
+        <br>
+        <input type="submit" name="submit" value="Grabar">
+    </form>
+
+</body>
+</html>
